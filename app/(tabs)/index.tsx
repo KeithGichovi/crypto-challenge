@@ -4,6 +4,8 @@ import { Colors } from '@/constants/Colors';
 import Card from '@/components/card';
 import { Picker } from '@react-native-picker/picker';
 import Buttons from '@/components/Buttons';
+import { LinearGradient } from 'expo-linear-gradient';
+
 
 /***
  * 
@@ -65,30 +67,33 @@ export default function HomeScreen() {
 
   return (
     
+    
     <View style={styles.container}>
-      <Picker
-        selectedValue={selectedCrypto}
-        onValueChange={(itemValue) => setSelectedCrypto(itemValue)}
-        style={styles.picker}
-        mode={'dropdown'}
-        dropdownIconColor={Colors.dark.tint}
-        numberOfLines={1}
-      >
-        <Picker.Item label="ETHEREUM - ETH" value='eth-ethereum' color={Colors.dark.tint} enabled={true}/>
-        <Picker.Item label="BITCOIN - BTC" value='btc-bitcoin' color={Colors.dark.tint} />
-      </Picker>
+      <LinearGradient colors={['#271B38', '#1E3562']} style={styles.gradient}>
+        <Picker
+            selectedValue={selectedCrypto}
+            onValueChange={(itemValue) => setSelectedCrypto(itemValue)}
+            style={styles.picker}
+            mode={'dropdown'}
+            dropdownIconColor={Colors.dark.tint}
+            numberOfLines={1}
+          >
+            <Picker.Item label="ETHEREUM - ETH" value='eth-ethereum' color={Colors.dark.tint} enabled={true}/>
+            <Picker.Item label="BITCOIN - BTC" value='btc-bitcoin' color={Colors.dark.tint} />
+          </Picker>
 
-      <Card 
-        onPress={fetchCryptoPrice}
-        Crypto={cryptoValue.name}
-        CryptoPrice={cryptoValue.price}
-        currencyType={selectedCurrency}
-      />
-      <Buttons 
-        onPressGBP={() => setSelectedCurrency('GBP')}
-        onPressUSD={() => setSelectedCurrency('USD')}
-      />
-     </View> 
+          <Card 
+            onPress={fetchCryptoPrice}
+            Crypto={cryptoValue.name}
+            CryptoPrice={cryptoValue.price}
+            currencyType={selectedCurrency}
+          />
+          <Buttons 
+            onPressGBP={() => setSelectedCurrency('GBP')}
+            onPressUSD={() => setSelectedCurrency('USD')}
+          />
+        </LinearGradient>
+      </View>
     
   );
 }
@@ -96,6 +101,9 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
 
   container: {
+    flex: 1,
+  },
+  gradient:{
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
